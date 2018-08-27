@@ -3,7 +3,6 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.BasePage;
 
 public class SearchPage extends BasePage {
 
@@ -23,9 +22,9 @@ public class SearchPage extends BasePage {
         return this;
     }
 
-    public SearchPage clickSearch() {
+    public ResultsPage clickSearch() {
         this.searchButton.submit();
-        return new SearchPage(driver);
+        return new ResultsPage(driver);
     }
 
 }
