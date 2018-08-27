@@ -5,17 +5,22 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class ResultsPage extends SearchPage {
 
-    @FindBy(id = "pnnext")
-    private WebElement buttonNextPage;
-
-    @FindBy(css = "a[href*='tbm=isch")
-    private WebElement buttonImages;
-
+    private static final String NEXT_BUTTON_LOCATOR = "pnnext";
+    private static final String BUTTON_IMAGES_LOCATOR = "a[href*='tbm=isch";
     private static final String PAGE_CURSOR_LOCATOR = "cur";
     private static final String RESULTS_LOCATOR = "h3.r > a";
     private static final String IMAGE_LOCATOR = "rg_l";
+    private static final String IMAGE_URL_SUBSTRING = "tbm=isch";
+
+    @FindBy(id = NEXT_BUTTON_LOCATOR)
+    private WebElement buttonNextPage;
+
+    @FindBy(css = BUTTON_IMAGES_LOCATOR)
+    private WebElement buttonImages;
 
 
     public ResultsPage(WebDriver driver) {
@@ -44,6 +49,22 @@ public class ResultsPage extends SearchPage {
         return new ResultsPage(driver);
     }
 
+    public BasePage clickResult(List<WebElement> resultsList, int position) {
+        if (!resultsList.isEmpty()) {
+            WebElement result = resultsList.get(position);
+            result.click();
+        }
+        return new BasePage(driver);
+    }
+
+    public List<WebElement> getResults() {
+        List<WebElement> resultsList = driver.findElements(By.cssSelector(RESULTS_LOCATOR));
+        return resultsList;
+    }
+
+    public boolean inImageTab() {
+        return driver.getCurrentUrl().contains(IMAGE_URL_SUBSTRING);
+    }
 
 
 }

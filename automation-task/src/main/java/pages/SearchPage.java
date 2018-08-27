@@ -6,10 +6,13 @@ import org.openqa.selenium.support.FindBy;
 
 public class SearchPage extends BasePage {
 
-    @FindBy(name = "q")
+    private static final String SEARCH_INPUT_LOCATOR = "q";
+    private static final String SEARCH_BUTTON_LOCATOR = "btnK";
+
+    @FindBy(name = SEARCH_INPUT_LOCATOR)
     private WebElement searchInputField;
 
-    @FindBy(name = "btnK")
+    @FindBy(name = SEARCH_BUTTON_LOCATOR)
     private WebElement searchButton;
 
     public SearchPage(WebDriver driver) {
