@@ -3,20 +3,27 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
+import utils.drivermanager.DriverManagerFactory;
+import utils.drivermanager.DriverTypes;
+import utils.drivermanager.managers.DriverManager;
 
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
 
-    public static WebDriver driver;
+    protected static WebDriver driver;
+    protected static DriverManager driverManager;
+    public static DriverTypes driverType;
 
     @BeforeTest
     public static void setUp() {
-        driver = new FirefoxDriver();
+        driverType = DriverTypes.FIREFOX;
+        driverManager = new DriverManagerFactory().getManager(driverType);
     }
 
     @BeforeMethod
     public static void initDriver() {
+        driver = driverManager.getDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
