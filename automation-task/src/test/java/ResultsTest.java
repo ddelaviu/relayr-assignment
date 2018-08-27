@@ -1,3 +1,4 @@
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.ResultsPage;
@@ -21,6 +22,7 @@ public class ResultsTest extends BaseTest {
     @Test
     public void navigateToSecondPage() {
         results.clickNext();
+        Assert.assertEquals(results.getCurrentPage(), "2");
     }
 
 }
