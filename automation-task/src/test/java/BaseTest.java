@@ -14,10 +14,23 @@ public class BaseTest {
     protected static WebDriver driver;
     protected static DriverManager driverManager;
     public static DriverTypes driverType;
+    public static String browser;
 
     @BeforeTest
     public static void setUp() {
-        driverType = DriverTypes.FIREFOX;
+        browser = System.getProperty("browser");
+        if (browser == null) { browser = "firefox"; }
+        switch (browser) {
+            case "chrome":
+                driverType = DriverTypes.CHROME;
+                break;
+            case "firefox":
+                driverType = DriverTypes.FIREFOX;
+                break;
+            default:
+                driverType = DriverTypes.CHROME;
+        }
+
         driverManager = new DriverManagerFactory().getManager(driverType);
     }
 
